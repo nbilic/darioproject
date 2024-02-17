@@ -1,0 +1,53 @@
+html,
+body,
+main {
+  margin: 0;
+  padding: 0;
+  background-color: rgba(200, 200, 200, 100);
+}
+
+nav {
+  background-color: aliceblue;
+  height: 100%;
+  width: 100%;
+  border: 1px solid white;
+}
+
+nav > ul {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  list-style-type: none;
+}
+
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movies > img {
+  margin: 5px;
+  transition: 0.1s ease-in;
+  cursor: pointer;
+  border: 1px solid orange;
+}
+
+.movies > img:hover {
+  scale: 1.1;
+}
+
+.home-button {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: orange;
+}
+
+.movie {
+  display: flex;
+  text-align: center;
+  margin: auto;
+  border-bottom: 3px solid orange;
+  border-top: 3px solid orange;
+  padding: 15px;
+}
