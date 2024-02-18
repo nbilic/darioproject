@@ -1,4 +1,4 @@
-import { getTrendingMovies, searchMovies } from "./api-service.js";
+import { getById, getTrendingMovies, searchMovies } from "./api-service.js";
 
 const POSTER_PATH = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2";
 const DEFAULT_POSTER = "https://www.movienewz.com/img/films/poster-holder.jpg";
@@ -8,7 +8,7 @@ const renderHomepage = (movies) => {
   moviesDiv.innerHTML = "";
   movies.forEach((movie) => {
     const img = createImg(movie.poster_path, "200px");
-    img.addEventListener("click", () => renderSingleMovie(movie));
+    img.addEventListener("click", () => renderSingleMovie(movie.id));
     moviesDiv.appendChild(img);
   });
 };
@@ -20,15 +20,18 @@ const search = async (event) => {
   }
 };
 
-const renderSingleMovie = ({ poster_path, overview, original_title }) => {
+const renderSingleMovie = async (id) => {
+  const movie = await getById(id);
   const poster = document.querySelector(".movie-poster");
   const title = document.querySelector(".movie-title");
-  const details = document.querySelector(".movie-overview");
-  poster.src = `${POSTER_PATH}${poster_path}`;
-  poster.style.width = "300px";
-  details.innerHTML = overview;
-  title.innerHTML = original_title;
-  scrollToTop();
+  const details = document.querySelector(".movie-description");
+  poster.src = `${POSTER_PATH}${movie.poster_path}`;
+  poster.style.width = "200px";
+  poster.style.height = "300px";
+  details.innerHTML = movie.overview;
+  title.innerHTML = movie.original_title;
+
+  displayModal();
 };
 
 const scrollToTop = () => {
@@ -43,9 +46,19 @@ const createImg = (src, width) => {
   return imgElement;
 };
 
+const displayModal = () => {
+  const modal = document.getElementById("myModal");
+  modal.style.display = "block";
+};
+
+const closeModal = () => {
+  const modal = document.getElementById("myModal");
+  modal.style.display = "none";
+};
+
 // CREATE EVENT LISTENERS
 document.getElementById("inputbox").addEventListener("keypress", search);
-
+document.getElementById("close-modal").addEventListener("click", closeModal);
 // INITIALIZE APP
 const initApp = async () => {
   const trendingMovies = await getTrendingMovies();

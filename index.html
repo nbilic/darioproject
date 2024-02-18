@@ -8,23 +8,34 @@
   </head>
   <body>
     <main>
-      <nav>
-        <ul>
-          <li class="home-button">Home</li>
-          <li>
-            <input type="text" placeholder="Search" id="inputbox" />
-          </li>
-        </ul>
+      <nav class="navigation-buttons">
+        <button class="home-button">HOME</button>
+        <button class="library-button">LIBRARY</button>
       </nav>
 
-      <div class="movie">
-        <img class="movie-poster" />
-        <div class="movie-details">
+      <div class="search">
+        <input
+          type="text"
+          class="search-bar"
+          id="inputbox"
+          placeholder="Enter movie name..."
+        />
+      </div>
+
+      <div class="movies"></div>
+
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="close-modal">&times;</span>
+          <div class="movies"></div>
           <div class="movie-title"></div>
-          <div class="movie-overview"></div>
+          <div class="details">
+            <img class="movie-poster" />
+            <div class="genres"></div>
+            <div class="movie-description"></div>
+          </div>
         </div>
       </div>
-      <div class="movies"></div>
       <script src="script.js" type="module" defer></script>
     </main>
   </body>

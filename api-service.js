@@ -1,5 +1,5 @@
 const URL = "https://api.themoviedb.org/3";
-const API_KEY = "58e6eb6950d2e03556ac2af37dd40921";
+const API_KEY = "";
 
 const getTrendingMovies = async () => {
   const res = await axios.get(`${URL}/movie/upcoming?api_key=${API_KEY}`);
@@ -13,4 +13,8 @@ const searchMovies = async (name) => {
   return res.data.results;
 };
 
-export { getTrendingMovies, searchMovies };
+const getById = async (id) => {
+  const res = await axios.get(`${URL}/movie/${id}?api_key=${API_KEY}`);
+  return res.data;
+};
+export { getTrendingMovies, searchMovies, getById };
